@@ -1,7 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
-const { makeExecutableSchema } = require('graphql-tools');
+import express from 'express'
+import bodyParser from 'body-parser'
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import { makeExecutableSchema } from 'graphql-tools';
 
 // Some fake data
 const books = [
@@ -15,18 +15,15 @@ const books = [
   },
 ];
 
-// The GraphQL schema in string form
 const typeDefs = `
   type Query { books: [Book] }
   type Book { title: String, author: String }
 `;
 
-// The resolvers
 const resolvers = {
   Query: { books: () => books },
 };
 
-// Put together a schema
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
