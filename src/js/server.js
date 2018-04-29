@@ -3,6 +3,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import { graphqlExpress, graphiqlExpress } from "apollo-server-express";
 import { makeExecutableSchema } from "graphql-tools";
+import typeDefs from "../graphql/typeDefs.graphql";
+import resolvers from "./resolvers";
 
 if (!process.env.PORT) {
   throw new Error(
@@ -10,27 +12,6 @@ if (!process.env.PORT) {
   );
 }
 const PORT = process.env.PORT;
-
-// Some fake data
-const books = [
-  {
-    title: "Harry Potter and the Sorcerer's stone",
-    author: "J.K. Rowling"
-  },
-  {
-    title: "Jurassic Park",
-    author: "Michael Crichton"
-  }
-];
-
-const typeDefs = `
-  type Query { books: [Book] }
-  type Book { title: String, author: String }
-`;
-
-const resolvers = {
-  Query: { books: () => books }
-};
 
 const schema = makeExecutableSchema({
   typeDefs,

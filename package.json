@@ -2,10 +2,12 @@
   "name": "graphql-bare-minimum",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/js/server.js",
   "author": "jackdbd <jackdebidda@gmail.com>",
   "scripts": {
-    "start": "babel-node index.js",
+    "build": "webpack --config ./webpack.config.js --progress --mode production",
+    "dev": "webpack --config ./webpack.config.js --mode development",
+    "serve": "node public/bundle.js",
     "lint": "prettier --write '{,!(node_modules)/}**/*.{js,jsx}'"
   },
   "dependencies": {
@@ -14,12 +16,16 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.1",
     "graphql-tools": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
-    "prettier": "^1.12.1"
+    "prettier": "^1.12.1",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
   }
 }
