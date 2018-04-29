@@ -1,7 +1,7 @@
 {
-  "name": "graphql-bare-minimum",
+  "name": "graphql-webpack-minimal",
   "version": "1.0.0",
-  "description": "",
+  "description": "A super-simple GraphQL server with a basic configuration for webpack 4.",
   "main": "src/js/server.js",
   "author": "jackdbd <jackdebidda@gmail.com>",
   "scripts": {
