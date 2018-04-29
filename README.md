@@ -16,8 +16,11 @@ Go to `http://localhost:3000/graphiql` to run queries like this one:
 {
   books {
     title
+    author
   }
+  getFortuneCookie
 }
+
 ```
 
 The main point of using webpack is to write GraphQL types, queries and mutations in `.graphql` files.
