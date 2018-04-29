@@ -1,18 +1,26 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import { makeExecutableSchema } from 'graphql-tools';
+require("dotenv").load();
+import express from "express";
+import bodyParser from "body-parser";
+import { graphqlExpress, graphiqlExpress } from "apollo-server-express";
+import { makeExecutableSchema } from "graphql-tools";
+
+if (!process.env.PORT) {
+  throw new Error(
+    "Please setup PORT in .env file (place .env file in the root of this repo)."
+  );
+}
+const PORT = process.env.PORT;
 
 // Some fake data
 const books = [
   {
     title: "Harry Potter and the Sorcerer's stone",
-    author: 'J.K. Rowling',
+    author: "J.K. Rowling"
   },
   {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
+    title: "Jurassic Park",
+    author: "Michael Crichton"
+  }
 ];
 
 const typeDefs = `
@@ -21,24 +29,22 @@ const typeDefs = `
 `;
 
 const resolvers = {
-  Query: { books: () => books },
+  Query: { books: () => books }
 };
 
 const schema = makeExecutableSchema({
   typeDefs,
-  resolvers,
+  resolvers
 });
 
-// Initialize the app
 const app = express();
 
 // The GraphQL endpoint
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
 
 // GraphiQL, a visual editor for queries
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 
-// Start the server
-app.listen(3000, () => {
-  console.log('Go to http://localhost:3000/graphiql to run queries!');
+app.listen(PORT, () => {
+  console.log(`Go to http://localhost:${PORT}/graphiql to run queries!`);
 });
